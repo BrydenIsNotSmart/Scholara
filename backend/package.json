@@ -1,0 +1,21 @@
+{
+  "name": "scholara-backend",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "module": "src/index.ts",
+  "scripts": {
+    "dev": "bun --watch src/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "description": "Scholara backend",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^17.2.1"
+  }
+}
