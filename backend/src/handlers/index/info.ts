@@ -1,6 +1,6 @@
 import { SchoolName } from "../../config";
 
-export async function info(req: Request): Promise<Response> {
+export async function infoGet(req: Request): Promise<Response> {
   const jsonInfo = {
     name: "Scholara",
     version: "0.1.0",

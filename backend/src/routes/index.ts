@@ -1,7 +1,7 @@
-import { info } from "../handlers/index/";
+import { infoGet } from "../handlers/index/index";
 
 export const routes = {
   "/": {
-    GET: (req: Request) => info(req),
+    GET: (req: Request) => infoGet(req),
   },
 };

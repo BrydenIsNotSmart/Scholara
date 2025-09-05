@@ -2,6 +2,7 @@ import { serve } from "bun";
 import { readdirSync } from "fs";
 import path from "path";
 import { PORT } from "./config";
+import chalk from "chalk";
 import "./database";
 
 type Routes = Record<
@@ -16,6 +17,11 @@ for (const file of readdirSync(path.join(import.meta.dir, "routes"))) {
     const mod = await import(`./routes/${file}`);
     if (mod.routes) {
       Object.assign(routes, mod.routes);
+      console.info(
+        `${chalk.blue.bold("[SERVER]")}: Registered ${file
+          .trim()
+          .slice(0, -3)} route.`
+      );
     }
   }
 }
@@ -25,4 +31,4 @@ const server = serve({
   routes,
 });
 
-console.log(`🚀 Server running at ${server.url}`);
+console.info(`${chalk.blue.bold("[SERVER]")}: Running at ${server.url}.`);

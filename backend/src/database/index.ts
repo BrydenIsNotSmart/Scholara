@@ -1,7 +1,10 @@
 import { SQL } from "bun";
+import { drizzle } from "drizzle-orm/bun-sql";
+import { migrate } from "drizzle-orm/bun-sql/migrator";
 import { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } from "../config";
+import { users, sessions } from "./schema";
 
-export const db = new SQL({
+const client = new SQL({
   hostname: DB_HOST,
   port: Number(DB_PORT),
   username: DB_USER,
@@ -10,6 +13,11 @@ export const db = new SQL({
   adapter: "postgres",
 });
 
-const now = await db`SELECT NOW()`;
+export const db = drizzle(client);
+await migrate(db, { migrationsFolder: "./drizzle" });
 
-console.log(now);
+const selectUsers = await db.select().from(users);
+console.log("Existing users:", selectUsers);
+
+const selectSessions = await db.select().from(sessions);
+console.log("Existing sessions:", selectSessions);
